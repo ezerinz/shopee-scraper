@@ -1,5 +1,5 @@
 # Use slim Python
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 # Set environment variable to avoid prompts
 ENV DEBIAN_FRONTEND=noninteractive
