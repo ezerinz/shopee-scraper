@@ -35,5 +35,4 @@ COPY . .
 # Expose Flask port
 EXPOSE 8080
 
-# Run Gunicorn with 4 workers
-CMD ["gunicorn", "main:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "--log-level", "debug", "--access-logfile", "-", "--error-logfile", "-", "main:app"]
