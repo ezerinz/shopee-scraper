@@ -50,7 +50,7 @@ def get_products(keyword: str):
 
     with StealthySession(
         real_chrome=True,
-        headless=False,
+        headless=True,
         allow_webgl=False,
     ) as s:
         browser = s.context
