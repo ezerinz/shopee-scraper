@@ -95,6 +95,10 @@ greenlet==3.3.2 \
     # via
     #   patchright
     #   playwright
+gunicorn==25.3.0 \
+    --hash=sha256:cacea387dab08cd6776501621c295a904fe8e3b7aae9a1a3cbb26f4e7ed54660 \
+    --hash=sha256:f74e1b2f9f76f6cd1ca01198968bd2dd65830edc24b6e8e4d78de8320e2fe889
+    # via shopee-scraper
 itsdangerous==2.2.0 \
     --hash=sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef \
     --hash=sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173
@@ -207,6 +211,10 @@ orjson==3.11.8 \
     --hash=sha256:ec795530a73c269a55130498842aaa762e4a939f6ce481a7e986eeaa790e9da4 \
     --hash=sha256:fa72e71977bff96567b0f500fc5bfd2fdf915f34052c782a4c6ebbdaa97aa858
     # via scrapling
+packaging==26.0 \
+    --hash=sha256:00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4 \
+    --hash=sha256:b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529
+    # via gunicorn
 patchright==1.58.2 \
     --hash=sha256:0e68d0c538b5bd2bd6ef0b1327e9e766c3919d5aeade8b7bd4b29ecd3adfc0b4 \
     --hash=sha256:13aef416c59f23f0fb552658281890ef349db2bee2e449c159560867c2e6cb61 \

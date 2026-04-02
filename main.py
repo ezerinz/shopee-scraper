@@ -48,7 +48,11 @@ def get_products(keyword: str):
     products = []
     stop_flag = False
 
-    with StealthySession(real_chrome=True, headless=True) as s:
+    with StealthySession(
+        real_chrome=False,
+        headless=True,
+        additional_args={"executable_path": "/usr/bin/google-chrome-stable"},
+    ) as s:
         browser = s.context
         page = browser.new_page()
 
