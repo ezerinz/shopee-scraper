@@ -1,7 +1,7 @@
 from flask import Flask, request
 from patchright.sync_api import Response
 from urllib.parse import urlencode
-from scrapling.fetchers import StealthySession
+from scrapling.fetchers import StealthyFetcher, StealthySession
 
 app = Flask(__name__)
 
@@ -44,36 +44,42 @@ def selection_sort(array):
     return array
 
 
+session = StealthyFetcher()
+
+# session.start()
+# browser = session.context
+
+
 def get_products(keyword: str):
     products = []
     stop_flag = False
 
-    with StealthySession(
+    # page = browser.new_page()
+
+    def on_response(response: Response):
+        nonlocal stop_flag
+        nonlocal products
+
+        url = response.url
+        if "search_items" in url:
+            products = parse_json(response.json())
+            products = selection_sort(products)
+            stop_flag = True
+
+    # page.on("response", on_response)
+    page = session.fetch(
+        generate_url(keyword),
+        capture_xhr=r".*search_items*",
         real_chrome=True,
         headless=True,
         allow_webgl=False,
-    ) as s:
-        browser = s.context
-        page = browser.new_page()
-
-        def on_response(response: Response):
-            nonlocal stop_flag
-            nonlocal products
-
-            url = response.url
-            if "search_items" in url:
-                products = parse_json(response.json())
-                products = selection_sort(products)
-                stop_flag = True
-
-        page.on("response", on_response)
-        page.goto(generate_url(keyword))
-
-        while not stop_flag:
-            page.wait_for_timeout(100)
-
-        page.close()
-        browser.close()
+        network_idle=True,
+    )
+    for response in page.captured_xhr:
+        url = response.url
+        if "search_items" in url:
+            products = parse_json(response.json())
+            products = selection_sort(products)
 
     return products[:3]
 
