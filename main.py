@@ -77,8 +77,14 @@ def get_products(keyword: str):
     )
     for response in page.captured_xhr:
         url = response.url
+        print(url)
         if "search_items" in url:
-            products = parse_json(response.json())
+            try:
+                data = response.json()
+                print(data)
+            except Exception as e:
+                data = {}
+            products = parse_json(data)
             products = selection_sort(products)
 
     return products[:3]
